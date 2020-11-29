@@ -56,7 +56,7 @@ final class RouterTest extends TestCase
     public function testSlashFound(): void
     {
         $this->init_router();
-        $this->router->run('');
+        $this->router->run('/');
 
         $this->assertEquals(
             $this->result,
