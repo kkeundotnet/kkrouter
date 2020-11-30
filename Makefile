@@ -6,4 +6,4 @@ vendor/bin/phpunit:
 
 .PHONY: test
 test:
-	./vendor/bin/phpunit test/RouterTest.php
+	./vendor/bin/phpunit test/Test.php
