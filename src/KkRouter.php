@@ -46,8 +46,12 @@ class KkRouter
         }
     }
 
-    public function run(string $request) : void
+    public function run(?string $request=null) : void
     {
+        if (is_null($request)) {
+            $request_uri = parse_url($_SERVER['REQUEST_URI']);
+            $request = $request_uri['path'];
+        }
         $request = self::explode('/', trim($request, '/'));
         foreach ($this->routing_cases as $routing_case) {
             $matched = [];
