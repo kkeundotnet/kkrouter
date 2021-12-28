@@ -1,29 +1,31 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kkeundotnet\Kkrouter;
 
 class KkRouter
 {
-    // Callable cannot be type hinted. https://stitcher.io/blog/typed-properties-in-php-74
-    /* callable */ private $default_callback;
     private array $routing_cases = [];
 
-    public function __construct(callable $default_callback)
-    {
-        $this->default_callback = $default_callback;
+    public function __construct(
+        // Callable cannot be type hinted. https://stitcher.io/blog/typed-properties-in-php-74
+        private /* callable */  $default_callback,
+    ) {
     }
 
-    public function add(array $configs, callable $callback) : void
-    {
+    public function add(
+        array /* KkElement */ $configs,
+        callable $callback,
+    ): void {
         $this->routing_cases[] = ['configs' => $configs, 'callback' => $callback];
     }
 
     private static function match_routing_case(
-        array $request,
-        array $configs,
-        array &$matched
-    ) : bool {
+        array /* string */ $request,
+        array /* KkElement */ $configs,
+        array /* string */ &$matched,
+    ): bool {
         $len = count($request);
         if ($len !== count($configs)) {
             return false;
@@ -37,7 +39,7 @@ class KkRouter
         return true;
     }
 
-    private static function explode(string $delim, string $s) : array
+    private static function explode(string $delim, string $s): array /* string */
     {
         if (empty($s)) {
             return [];
@@ -46,7 +48,7 @@ class KkRouter
         }
     }
 
-    public function run(?string $request=null) : void
+    public function run(?string $request=null): void
     {
         if (is_null($request)) {
             $request_uri = parse_url($_SERVER['REQUEST_URI']);

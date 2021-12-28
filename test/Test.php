@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use Kkeundotnet\Kkrouter\KkRouter;
@@ -16,24 +17,24 @@ final class Test extends TestCase
             return;
         }
 
-        $this->router = new KkRouter(function() : void {
-                echo 'not found';
-            });
+        $this->router = new KkRouter(function (): void {
+            echo 'not found';
+        });
         $this->router->add(
             [],
-            function() : void {
+            function (): void {
                 echo 'found: empty';
             }
         );
         $this->router->add(
             [new KkString('abc'), new KkString('def'), new KkString('ghi')],
-            function() : void {
+            function (): void {
                 echo 'found: strings';
             }
         );
         $this->router->add(
             [new KkString('pat'), new KkPattern('|^[a-z]+$|'), new KkPattern('|^[A-Z]+$|')],
-            function($matched1, $matched2) : void {
+            function ($matched1, $matched2): void {
                 echo "found: patterns({$matched1}, {$matched2})";
             }
         );
