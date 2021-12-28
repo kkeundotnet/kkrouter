@@ -7,7 +7,7 @@ namespace Kkeundotnet\Kkrouter;
 class KkPattern implements KkElement
 {
     public function __construct(
-        private string $pat,
+        private readonly string $pat,
     ) {
     }
 

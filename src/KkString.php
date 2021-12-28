@@ -7,7 +7,7 @@ namespace Kkeundotnet\Kkrouter;
 class KkString implements KkElement
 {
     public function __construct(
-        private string $s,
+        private readonly string $s,
     ) {
     }
 
