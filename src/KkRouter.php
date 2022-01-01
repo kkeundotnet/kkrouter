@@ -39,22 +39,13 @@ class KkRouter
         return true;
     }
 
-    private static function explode(string $delim, string $s): array /* string */
-    {
-        if (empty($s)) {
-            return [];
-        } else {
-            return explode($delim, $s);
-        }
-    }
-
     public function run(?string $request=null): void
     {
         if (is_null($request)) {
             $request_uri = parse_url($_SERVER['REQUEST_URI']);
             $request = $request_uri['path'];
         }
-        $request = self::explode('/', trim($request, '/'));
+        $request = $request === '' || $request === '/' ? [] : explode('/', trim($request, '/'));
         foreach ($this->routing_cases as $routing_case) {
             $matched = [];
             if (self::match_routing_case($request, $routing_case['configs'], $matched)) {
