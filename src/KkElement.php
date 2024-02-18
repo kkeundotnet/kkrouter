@@ -6,5 +6,6 @@ namespace Kkeundotnet\Kkrouter;
 
 interface KkElement
 {
+    /** @param string[] $matched */
     public function match(string $request, array &$matched): bool;
 }

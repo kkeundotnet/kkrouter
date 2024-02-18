@@ -11,6 +11,7 @@ class KkString implements KkElement
     ) {
     }
 
+    /** @param string[] $matched */
     public function match(string $request, array &$matched): bool
     {
         return $request === $this->s;

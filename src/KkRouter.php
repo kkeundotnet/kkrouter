@@ -8,23 +8,33 @@ class KkRouter
 {
     private array $routing_cases = [];
 
+    /** @param callable(): void $default_callback */
     public function __construct(
         // Callable cannot be type hinted. https://stitcher.io/blog/typed-properties-in-php-74
         private /* callable */  $default_callback,
     ) {
     }
 
+    /**
+     * @param KkElement[] $configs
+     * @param callable(string...): void $callback
+     */
     public function add(
-        array /* KkElement */ $configs,
+        array $configs,
         callable $callback,
     ): void {
         $this->routing_cases[] = ['configs' => $configs, 'callback' => $callback];
     }
 
+    /**
+     * @param string[] $request
+     * @param KkElement[] $configs
+     * @param string[] $matched
+     */
     private static function match_routing_case(
-        array /* string */ $request,
-        array /* KkElement */ $configs,
-        array /* string */ &$matched,
+        array $request,
+        array $configs,
+        array &$matched,
     ): bool {
         $len = count($request);
         if ($len !== count($configs)) {
@@ -39,7 +49,7 @@ class KkRouter
         return true;
     }
 
-    public function run(?string $request=null): void
+    public function run(?string $request = null): void
     {
         if (is_null($request)) {
             $request_uri = $_SERVER['REQUEST_URI'] ?? '';

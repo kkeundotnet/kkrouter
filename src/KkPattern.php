@@ -11,6 +11,7 @@ class KkPattern implements KkElement
     ) {
     }
 
+    /** @param string[] $matched */
     public function match(string $request, array &$matched): bool
     {
         $r = preg_match($this->pat, $request) === 1;
